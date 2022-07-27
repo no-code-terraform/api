@@ -1,4 +1,5 @@
 # tfmaker-api
+
 GUI in your browser to draw your cloud infrastructure and generate your terraform files.
 
 ### Requirements
@@ -18,6 +19,7 @@ GUI in your browser to draw your cloud infrastructure and generate your terrafor
 
 ### Get started
 
+- python manage.py migrate
 - python manage.py runserver
 - python manage.py createsuperuser
 
