@@ -4,8 +4,8 @@ GUI in your browser to draw your cloud infrastructure and generate your terrafor
 
 ### Requirements
 
-- [python3](https://www.python.org/downloads/)
-- [MySQL](https://www.mysql.com/fr/)
+- [python](https://www.python.org/downloads/) ^3.9
+- [MySQL](https://www.mysql.com/fr/) ^8.0
 
 ### Tools
 
@@ -19,10 +19,9 @@ GUI in your browser to draw your cloud infrastructure and generate your terrafor
 
 ### Get started
 
-- python manage.py migrate
-- python manage.py runserver
-- python manage.py createsuperuser
+- Run `python manage.py migrate`
+- Run `python manage.py runserver` || `python -m gunicorn`
+- Run `python manage.py createsuperuser`
 
-### Deploy
-
-- In progress
+### Test
+- Rum `python manage.py test`
