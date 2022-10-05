@@ -38,6 +38,6 @@ def download(
     return HttpResponse(
         content_type='application/zip',
         headers={
-            'Content-Disposition': 'attachment; filename=tfmaker.zip'
+            'Content-Disposition': 'attachment; filename=tf.zip'
         }
     )
