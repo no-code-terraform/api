@@ -3,10 +3,8 @@ import uuid
 from django.db import models
 from django_jsonform.models.fields import JSONField
 
-from api.domain import (
-    config,
-    constant,
-)
+from api.domain import constant
+from api import config
 
 
 class Service(models.Model):
@@ -47,45 +45,7 @@ class Service(models.Model):
     extra = JSONField(
         schema={
             'type': 'array',
-            'items': {
-                'type': 'object',
-                'properties': {
-                    'name': {
-                        'type': 'string',
-                    },
-                    'type': {
-                        'type': 'string',
-                        'choices': config.SERVICE_EXTRA_TYPES,
-                    },
-                    'min': {
-                        'type': 'interger',
-                        'required': False,
-                        'default': None,
-                    },
-                    'max': {
-                        'type': 'interger',
-                        'required': False,
-                        'default': None,
-                    },
-                    'choices': {
-                        'type': 'list',
-                        'items': {
-                            'type': 'string',
-                        },
-                        'default': None,
-                        'required': False,
-                    },
-                    'is_multiple_choice': {
-                        'type': 'boolean',
-                        'default': False,
-                        'required': False,
-                    },
-                    'default': {
-                        'type': 'string',
-                        'required': False,
-                    },
-                },
-            }
+            'items': config.service_extra_item_schema(),
         },
         default=list,
     )
