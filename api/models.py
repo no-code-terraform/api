@@ -1,8 +1,12 @@
 import uuid
 
 from django.db import models
+from django_jsonform.models.fields import JSONField
 
-from api.domain import constant
+from api.domain import (
+    config,
+    constant,
+)
 
 
 class Service(models.Model):
@@ -35,9 +39,55 @@ class Service(models.Model):
     )
     description = models.TextField()
     url = models.URLField()
-    extra = models.JSONField(
-        default=dict,
-        blank=True,
+    tf_key = models.CharField(
+        max_length=50,
+        unique=True,
+        default=None,
+    )
+    extra = JSONField(
+        schema={
+            'type': 'array',
+            'items': {
+                'type': 'object',
+                'properties': {
+                    'name': {
+                        'type': 'string',
+                    },
+                    'type': {
+                        'type': 'string',
+                        'choices': config.SERVICE_EXTRA_TYPES,
+                    },
+                    'min': {
+                        'type': 'interger',
+                        'required': False,
+                        'default': None,
+                    },
+                    'max': {
+                        'type': 'interger',
+                        'required': False,
+                        'default': None,
+                    },
+                    'choices': {
+                        'type': 'list',
+                        'items': {
+                            'type': 'string',
+                        },
+                        'default': None,
+                        'required': False,
+                    },
+                    'is_multiple_choice': {
+                        'type': 'boolean',
+                        'default': False,
+                        'required': False,
+                    },
+                    'default': {
+                        'type': 'string',
+                        'required': False,
+                    },
+                },
+            }
+        },
+        default=list,
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

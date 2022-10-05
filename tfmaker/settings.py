@@ -43,7 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     'corsheaders',
-    'flat_json_widget',
+    'django_jsonform',
 
     'account',
     'api',
