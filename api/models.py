@@ -1,8 +1,10 @@
 import uuid
 
 from django.db import models
+from django_jsonform.models.fields import JSONField
 
 from api.domain import constant
+from api import config
 
 
 class Service(models.Model):
@@ -35,9 +37,17 @@ class Service(models.Model):
     )
     description = models.TextField()
     url = models.URLField()
-    extra = models.JSONField(
-        default=dict,
-        blank=True,
+    tf_key = models.CharField(
+        max_length=50,
+        unique=True,
+        default=None,
+    )
+    extra = JSONField(
+        schema={
+            'type': 'array',
+            'items': config.service_extra_item_schema(),
+        },
+        default=list,
     )
     created_at = models.DateTimeField(
         auto_now_add=True,

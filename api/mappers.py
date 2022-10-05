@@ -6,12 +6,12 @@ def service(
     kwargs = {}
 
     for k in [
-        'id',
         'provider',
         'type',
         'name',
         'description',
         'url',
+        'tf_key',
         'extra'
     ]:
         kwargs[k] = data[k]

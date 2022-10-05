@@ -1,6 +1,6 @@
 from .domain import contract, model
 from .models import Service
-from .mappers import service
+from .mappers import service as s_mapper
 
 
 class ServiceStorage(
@@ -13,7 +13,7 @@ class ServiceStorage(
 
         for item in Service.objects.all().values():
             results.append(
-                service(item)
+                s_mapper(item)
             )
 
         return results
