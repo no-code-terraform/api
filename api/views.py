@@ -1,7 +1,14 @@
-from django.http import HttpRequest, JsonResponse
+from django.http import (
+    HttpRequest,
+    HttpResponse,
+    JsonResponse,
+)
 
+from api.domain import (
+    constant,
+    context,
+)
 from tfmaker.helper import http
-from .domain import constant, context
 
 
 def index(
@@ -23,3 +30,14 @@ def services(
         .response_json_200({
             'services': [vars(i) for i in services]
         })
+
+
+def download(
+    request: HttpRequest
+) -> HttpResponse:
+    return HttpResponse(
+        content_type='application/zip',
+        headers={
+            'Content-Disposition': 'attachment; filename=tfmaker.zip'
+        }
+    )

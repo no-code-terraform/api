@@ -10,4 +10,8 @@ def main(data):
     compiler.program()
     emitter.write_files()
 
-    return open('./terraform.zip', 'r')
+    return open('./tfmaker.zip', 'r')
+
+
+if __name__ == "__main__":
+    print(add(2, 3))
