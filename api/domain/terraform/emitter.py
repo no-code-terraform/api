@@ -96,4 +96,4 @@ class Emitter:
             output_main.write(self.app)
         with open(path + 'variables.tf', 'w') as output_variable:
             output_variable.write(self.app_variables)
-        shutil.make_archive(self.directory, 'zip', self.directory)
+        # shutil.make_archive(self.directory, 'zip', self.directory)
