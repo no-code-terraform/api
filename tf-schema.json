@@ -15,7 +15,7 @@
         ],
         "elb" : [
           {
-            "availability_zones": ["eu-west-2a"],
+            "availability_zones": ["us-east-2a"],
             "name-elb": "my-load-balancer",
             "instances": "aws_instance.application.*.id",
             "cross_zone_load_balancing": true,
