@@ -22,13 +22,13 @@ resource "aws_key_pair" "app-key" {
 
 ''')
 
-    def instance(self, stages, data):
-        self.module(
-            stages,
-            data.get('instance_type'),
-            data.get('ami'),
-            data.get('count')
-        )
+    def ec2(self, data, stages):
+        self.emitter.emit_module(stages, {
+            'instance_type': '"' + data.get('instance_type') + '"',
+            'instance_ami': '"' + data.get('ami') + '"',
+            'instance_count': data.get('count'),
+            'instance_key_name': 'aws_key_pair.app-key.key_name',
+        })
         self.emitter.emit_service(('''resource "aws_instance" "{0}" {{
   ami = var.instance_ami
   instance_type = var.instance_type
@@ -39,7 +39,7 @@ resource "aws_key_pair" "app-key" {
   security_groups = [aws_security_group.{0}.name]
 
   tags = {{
-    Name = "${var.stage}-{0}"
+    Name = "${{var.stage}}-{0}"
     component = "{0}"
     stage = var.stage
   }}
@@ -53,12 +53,7 @@ resource "aws_key_pair" "app-key" {
         sg.default_instance_rule()
         self.emitter.emit_service(sg.get_security_group())
 
-    def message(self, data):
-        todo = ''
-        todo += ''
-
-    def load_balancing(self, data):
-        LoadBalancer(self.emitter).set_variables(data)
+    def elb(self, data, stages):
         self.emitter.emit_service(
-            LoadBalancer(self.emitter).generate_load_balancer()
+            LoadBalancer(self.emitter).get_load_balancer(data)
         )
