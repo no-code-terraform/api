@@ -5,3 +5,5 @@
 nohup.out
 /static/*
 !/static/.gitkeep
+/storage/tf
+!/storage/tf/.gitkeep
