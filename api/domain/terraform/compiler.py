@@ -4,7 +4,11 @@ from api.domain.terraform.providers.gcp import Gcp
 
 class Compiler:
     def __init__(self, data, emitter):
-        self.data = data
+        self.data = {
+            'stages': [],
+            'providers': {},
+            **data
+        }
         self.providers = {
             'aws': Aws(emitter),
             'gcp': Gcp(emitter),
