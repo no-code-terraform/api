@@ -1,5 +1,5 @@
-# TFMAKER API
+# tfmaker api
 ****
 
 * [Get Services](route/GetServices.md) : `GET /api/services`
-* [Download](route/Download.md) : `POST /api/download`
+* [Build TF](route/BuildTF.md) : `POST /api/tf`

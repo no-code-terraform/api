@@ -1,10 +1,10 @@
-# Download
+# Build TF
 
 ****
 
 ## Request
 
-**URI** : `/api/download`
+**URI** : `/api/tf/`
 
 **Method** : `POST`
 
