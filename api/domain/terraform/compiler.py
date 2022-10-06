@@ -1,5 +1,5 @@
-from terraform.providers.aws import Aws
-from terraform.providers.gcp import Gcp
+from api.domain.terraform.providers.aws import Aws
+from api.domain.terraform.providers.gcp import Gcp
 
 
 class Compiler:

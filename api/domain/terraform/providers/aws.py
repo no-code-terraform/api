@@ -1,6 +1,6 @@
-from terraform.providers.provider import Provider
-from terraform.services.load_balancer.load_balancer import LoadBalancer
-from terraform.services.security_group.security_group import SecurityGroup
+from api.domain.terraform.providers.provider import Provider
+from api.domain.terraform.services.load_balancer.load_balancer import LoadBalancer
+from api.domain.terraform.services.security_group.security_group import SecurityGroup
 
 
 class Aws(Provider):

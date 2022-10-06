@@ -7,3 +7,4 @@ nohup.out
 !/static/.gitkeep
 /storage/tf
 !/storage/tf/.gitkeep
+*DS_Store

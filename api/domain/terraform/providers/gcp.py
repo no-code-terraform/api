@@ -1,5 +1,5 @@
-from terraform.providers.provider import Provider
-from terraform.services.pub_sub import get_sub
+from api.domain.terraform.providers.provider import Provider
+from api.domain.terraform.services.pub_sub import get_sub
 
 
 class Gcp(Provider):

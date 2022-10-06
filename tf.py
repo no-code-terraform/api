@@ -3,14 +3,16 @@ from datetime import datetime
 import json
 import os
 
-from terraform.compiler import Compiler
-from terraform.emitter import Emitter
-from pathlib import Path
+from api.domain.terraform.compiler import Compiler
+from api.domain.terraform.emitter import Emitter
 
 TF_STORAGE_DIR = os.path.dirname(os.path.realpath(__file__)) + '/storage/tf'
 
 
-def main(tf_data: str, tf_name: str) -> None:
+def main(tf_data: str, tf_name: str = None) -> None:
+    if tf_name is None:
+        tf_name = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
+
     build_path = f'{TF_STORAGE_DIR}/{tf_name}'
     os.mkdir(build_path)
 
@@ -37,7 +39,6 @@ if __name__ == "__main__":
         type=str,
         nargs='+',
         help='Build folder name',
-        default=datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
     )
 
     data = vars(parser.parse_args())

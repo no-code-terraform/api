@@ -1,6 +1,6 @@
 import unittest
 from unittest.mock import Mock
-from terraform.providers.aws import Aws
+from api.domain.terraform.providers.aws import Aws
 
 
 class TestAws(unittest.TestCase):
