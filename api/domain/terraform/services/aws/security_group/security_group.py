@@ -37,8 +37,8 @@ class SecurityGroup:
     ingress {
         from_port   = #from
         to_port     = #to
-        protocol    = #protocol
-        cidr_blocks = #block
+        protocol    = "#protocol"
+        cidr_blocks = ["0.0.0.0/0"]
       }
 ''')
         end_template = MyTemplate('''
