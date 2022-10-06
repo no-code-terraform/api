@@ -1,6 +1,7 @@
 from api.domain.terraform.providers.provider import Provider
-from api.domain.terraform.services.load_balancer.load_balancer import LoadBalancer
-from api.domain.terraform.services.security_group.security_group import SecurityGroup
+from api.domain.terraform.services.aws.load_balancer.load_balancer import LoadBalancer
+from api.domain.terraform.services.aws.security_group.security_group import SecurityGroup
+from api.domain.terraform.services.aws.instance.instance import get_instance
 
 
 class Aws(Provider):
@@ -29,23 +30,7 @@ resource "aws_key_pair" "app-key" {
             'instance_count': data.get('count'),
             'instance_key_name': 'aws_key_pair.app-key.key_name',
         })
-        self.emitter.emit_service(('''resource "aws_instance" "{0}" {{
-  ami = var.instance_ami
-  instance_type = var.instance_type
-  key_name = var.instance_key_name
-
-  count = var.instance_count
-
-  security_groups = [aws_security_group.{0}.name]
-
-  tags = {{
-    Name = "${{var.stage}}-{0}"
-    component = "{0}"
-    stage = var.stage
-  }}
-}}
-
-''').format(data.get('name')))
+        self.emitter.emit_service(get_instance(data.get('name')))
         self._security_group(data.get('name'), data.get('ports'))
 
     def _security_group(self, type, ports):
