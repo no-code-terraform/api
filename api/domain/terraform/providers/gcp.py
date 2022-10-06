@@ -1,6 +1,6 @@
 from api.domain.terraform.providers.provider import Provider
-from api.domain.terraform.services.pub_sub import get_sub
-from api.domain.terraform.services.gci.google_compute_instance import get_gci
+from api.domain.terraform.services.gcp.pub_sub.pub_sub import get_sub
+from api.domain.terraform.services.gcp.gci.google_compute_instance import get_gci
 
 
 class Gcp(Provider):

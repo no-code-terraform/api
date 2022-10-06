@@ -1,6 +1,6 @@
 from string import Template
 
-from api.domain.terraform.services.security_group.rule import Rule
+from api.domain.terraform.services.aws.security_group.rule import Rule
 
 
 class MyTemplate(Template):
