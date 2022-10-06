@@ -18,15 +18,8 @@ class Compiler:
             self._services(emitter, data.get('services'))
 
     def _services(self, emitter, services):
-        data = services.get('instances')
-        if data:
-            for datum in data:
-                emitter.instance(self.data['stages'], datum)
-        data = services.get('messaging')
-        if data:
-            for datum in data:
-                emitter.message(datum)
-        data = services.get('loadBalancers')
-        if data:
-            for datum in data:
-                emitter.load_balancing(datum)
+        for service in services:
+            service_call = getattr(emitter, service, None)
+            if callable(service_call):
+                for data in services[service]:
+                    service_call(data, self.data['stages'])
