@@ -43,5 +43,5 @@ class Gcp(Provider):
 
 ''').format(data.get('gci_name')))
 
-    def pub_sub(self, data, stages):
+    def pubsub(self, data, stages):
         self.emitter.emit_service(get_sub(data.get('topic')))

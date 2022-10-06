@@ -49,7 +49,7 @@
             "gci_type": "f1-micro"
           }
         ],
-        "pub_sub": [
+        "pubsub": [
           {
             "topic": "test-topic"
           }

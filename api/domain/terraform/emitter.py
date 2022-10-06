@@ -28,6 +28,36 @@ def _create_array_variables(name, value):
     return data
 
 
+def read_me():
+    return '''
+# TfMaker
+
+These files were auto-generated, you can modify then as you need :)
+
+Happy coding
+
+Don't forget to add you credentials as variables
+
+See [our website](https://github.com/no-code-terraform) for more informations
+
+## File structure 
+
+```
+<terraform.zip>
+  ├─ application/
+  |   └─ main.tf
+  |   └─ variables.tf
+  ├─ main.tf
+  └─ variables.tf
+```
+The main terraform file contains all information about 
+providers and modules, whereas the main file inside 
+the application directory contains all information about 
+services.
+
+'''
+
+
 class Emitter:
     def __init__(self, directory):
         self.directory = directory
@@ -89,6 +119,8 @@ class Emitter:
             output_main.write(self.providers + self._emit_module())
         with open(self.directory + '/variables.tf', 'w') as output_variable:
             output_variable.write(self.variables)
+        with open(self.directory + '/README.md', 'w') as output_read:
+            output_read.write(read_me())
         path = self.directory + '/application/'
         if not os.path.exists(path):
             os.mkdir(path)
