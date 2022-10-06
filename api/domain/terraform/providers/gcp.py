@@ -10,10 +10,7 @@ class Gcp(Provider):
     def provider(self, region, project):
         self.emitter.emit_variable('gcp_region', region)
         self.emitter.emit_variable('gcp_project', project)
-        self.emitter.emit_variable('gcp_service_account_file')
         self.emitter.emit_provider('''provider "google" {
-  credentials = file(var.gcp_service_account_file)
-
   project = var.gcp_project
   region  = var.gcp_region
 }
@@ -24,6 +21,8 @@ class Gcp(Provider):
         self.emitter.emit_module(stages, {
             'gci_name': '"' + data.get('gci_name') + '"',
             'gci_type': '"' + data.get('gci_type') + '"',
+            'gcp_region': '"' + data.get('region') + '"',
+
         })
         self.emitter.emit_service(get_gci(data.get('gci_name')))
 
