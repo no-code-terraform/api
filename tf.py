@@ -3,8 +3,7 @@ from datetime import datetime
 import json
 import os
 
-from api.domain.terraform.compiler import Compiler
-from api.domain.terraform.emitter import Emitter
+from api.domain.usecase import build_tf
 
 TF_STORAGE_DIR = os.path.dirname(os.path.realpath(__file__)) + '/storage/tf'
 
@@ -13,16 +12,15 @@ def main(tf_data: str, tf_name: str = None) -> None:
     if tf_name is None:
         tf_name = datetime.now().strftime("%Y-%m-%d-%H-%M-%S")
 
-    build_path = f'{TF_STORAGE_DIR}/{tf_name}'
-    os.mkdir(build_path)
+    tf_path = f'{TF_STORAGE_DIR}/{tf_name}'
+    os.mkdir(tf_path)
 
-    emitter = Emitter(build_path)
-    compiler = Compiler(json.loads(tf_data), emitter)
+    build_tf.execute(
+        tf_data=json.loads(tf_data),
+        tf_path=tf_path,
+    )
 
-    compiler.program()
-    emitter.write_files()
-
-    return print(f'Create build in {build_path}')
+    return print(f'Create build in {tf_path}')
 
 
 if __name__ == "__main__":
@@ -37,7 +35,6 @@ if __name__ == "__main__":
     parser.add_argument(
         '--tf_name',
         type=str,
-        nargs='+',
         help='Build folder name',
     )
 

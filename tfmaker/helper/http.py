@@ -27,7 +27,7 @@ def response_json_201(
 
 
 def response_json_400(
-  error: dict,
+  error: dict = {},
   message: str = 'Bad Request',
 ) -> JsonResponse:
 	return JsonResponse(

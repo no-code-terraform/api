@@ -4,7 +4,7 @@
 
 ## Request
 
-**URI** : `/api/services`
+**URI** : `/api/services/`
 
 **Method** : `GET`
 
