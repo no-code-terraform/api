@@ -24,7 +24,7 @@ class Gcp(Provider):
             'gcp_region': '"' + data.get('region') + '"',
 
         })
-        self.emitter.emit_service(get_gci(data.get('gci_name')))
+        self.emitter.emit_service(self.__str__(), get_gci(data.get('gci_name')))
 
     def pubsub(self, data, stages):
-        self.emitter.emit_service(get_sub(data.get('topic')))
+        self.emitter.emit_service(self.__str__(), get_sub(data.get('topic')))
