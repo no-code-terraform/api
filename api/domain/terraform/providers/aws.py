@@ -30,15 +30,16 @@ resource "aws_key_pair" "app-key" {
             'instance_count': data.get('count'),
             'instance_key_name': 'aws_key_pair.app-key.key_name',
         })
-        self.emitter.emit_service(get_instance(data.get('name')))
+        self.emitter.emit_service(self.__str__(), get_instance(data.get('name')))
         self._security_group(data.get('name'), data.get('ports'))
 
     def _security_group(self, type, ports):
         sg = SecurityGroup(type)
         sg.default_instance_rule()
-        self.emitter.emit_service(sg.get_security_group())
+        self.emitter.emit_service(self.__str__(), sg.get_security_group())
 
     def elb(self, data, stages):
         self.emitter.emit_service(
+            self.__str__(),
             LoadBalancer(self.emitter).get_load_balancer(data)
         )

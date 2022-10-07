@@ -64,7 +64,7 @@ class Emitter:
         self.modules = {}
         self.modules_stage = []
         self.variables = ''
-        self.app = ''
+        self.app = {}
         self.app_variables = ''
 
     def emit_provider(self, string):
@@ -94,8 +94,10 @@ class Emitter:
 '''
         return module
 
-    def emit_service(self, string):
-        self.app += string
+    def emit_service(self, provider, string):
+        if not self.app.get(provider):
+            self.app[provider] = ''
+        self.app[provider] += string
 
     def emit_variable(self, name, value=None):
         self.variables += _create_variable(name, value)
@@ -123,7 +125,8 @@ class Emitter:
         path = self.directory + '/application/'
         if not os.path.exists(path):
             os.mkdir(path)
-        with open(path + 'main.tf', 'w') as output_main:
-            output_main.write(self.app)
+        for provider in self.app:
+            with open(path + provider + '.tf', 'w') as output_main:
+                output_main.write(self.app[provider])
         with open(path + 'variables.tf', 'w') as output_variable:
             output_variable.write(self.app_variables)
