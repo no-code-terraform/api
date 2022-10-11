@@ -44,6 +44,7 @@ INSTALLED_APPS = [
 
     'corsheaders',
     'django_jsonform',
+    'flat_json_widget',
 
     'account',
     'api',
