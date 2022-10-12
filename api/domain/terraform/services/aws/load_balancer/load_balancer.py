@@ -31,7 +31,7 @@ class LoadBalancer:
         self.set_variables('availability_zones_' + data.get('instances'), data.get('availability_zones'))
         self.set_variables('name-elb_' + data.get('instances'), data.get('name-elb'))
         self.set_variables('target_' + data.get('instances'), data.get('healthCheck').get('target'))
-        load_balancer_resource = '''resource "aws_elb" "application" {
+        load_balancer_resource = '''resource "aws_elb" "#{instances}" {
   name = "${var.name-elb_#{instances}}-${var.stage}"
   availability_zones = var.availability_zones_#{instances}
 
