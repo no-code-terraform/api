@@ -25,9 +25,9 @@ resource "aws_key_pair" "app-key" {
 
     def ec2(self, data, stages):
         self.emitter.emit_module(stages, {
-            'instance_type': '"' + data.get('instance_type') + '"',
-            'instance_ami': '"' + data.get('ami') + '"',
-            'instance_count': data.get('count'),
+            'instance_type_' + data.get('name'): '"' + data.get('instance_type') + '"',
+            'instance_ami_' + data.get('name'): '"' + data.get('ami') + '"',
+            'instance_count_' + data.get('name'): data.get('count'),
             'instance_key_name': 'aws_key_pair.app-key.key_name',
         })
         self.emitter.emit_service(self.__str__(), get_instance(data.get('name')))

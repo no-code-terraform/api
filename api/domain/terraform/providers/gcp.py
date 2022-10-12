@@ -19,9 +19,9 @@ class Gcp(Provider):
 
     def gci(self, data, stages):
         self.emitter.emit_module(stages, {
-            'gci_name': '"' + data.get('gci_name') + '"',
-            'gci_type': '"' + data.get('gci_type') + '"',
-            'gcp_region': '"' + data.get('region') + '"',
+            'gci_name_' + data.get('gci_name'): '"' + data.get('gci_name') + '"',
+            'gci_type_' + data.get('gci_name'): '"' + data.get('gci_type') + '"',
+            'gcp_region_' + data.get('gci_name'): '"' + data.get('region') + '"',
 
         })
         self.emitter.emit_service(self.__str__(), get_gci(data.get('gci_name')))
