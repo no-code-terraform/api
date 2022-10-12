@@ -1,3 +1,4 @@
+import json
 import os
 
 
@@ -7,19 +8,6 @@ def _create_variable(name, value=None):
     if value:
         data += '''
   default = "''' + value + '"'
-    data += '''
-}
-
-'''
-    return data
-
-
-def _create_array_variables(name, value):
-    data = 'variable "' + name + '''" {
-  type = list(string)'''
-    if value:
-        data += '''
-  default = ''' + value + ''
     data += '''
 }
 
@@ -105,15 +93,18 @@ class Emitter:
     def emit_app_variable(self, name, value=None):
         self.app_variables += _create_variable(name, value)
 
-    def emit_app_array_variable(self, name, values):
-        array_string = '['
-        for value in values:
-            value = str(value)
-            array_string += '"' + value + '",'
-        if array_string.endswith('",'):
-            array_string = array_string[:-1]
-            array_string += ']'
-        self.app_variables = _create_array_variables(name, array_string)
+    def emit_app_array_variable(self, name, value):
+        value = json.dumps(value)
+        value = value.__str__()
+        data = 'variable "' + name + '''" {
+  type = list(string)'''
+        if value:
+            data += '''
+  default = ''' + value + ''
+        data += '''
+}
+'''
+        self.app_variables += data
 
     def write_files(self):
         with open(self.directory + '/main.tf', 'w') as output_main:
