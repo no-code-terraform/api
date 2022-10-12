@@ -43,18 +43,18 @@ class LoadBalancer:
   }
 
   health_check {
-    healthy_threshold = #{healthy_threshold}
-    unhealthy_threshold = #{unhealthy_threshold}
-    timeout = #{timeout}
+    healthy_threshold = 2
+    unhealthy_threshold = 2
+    timeout = 3
     target = var.target
-    interval = #{interval}
+    interval = 30
   }
 
-  instances = aws_instance.application.*.id
+  instances = aws_instance.#{instances}.*.id
   cross_zone_load_balancing = true
   idle_timeout = #{idle_timeout}
   connection_draining = true
-  connection_draining_timeout = #{connection_draining_timeout}
+  connection_draining_timeout = 400
 
   tags = {
     Name = "var.name-elb-${var.stage}"
