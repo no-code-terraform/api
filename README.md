@@ -25,3 +25,9 @@ GUI in your browser to draw your cloud infrastructure and generate your terrafor
 
 ### Test
 - Rum `python manage.py test`
+
+### Run with Docker
+- Run `docker build -t tfmaker-api .`
+- Run `docker run -p 8000:8000 -it --rm --name tfmaker-api tfmaker-api`
+- Run `docker exec -it tfmaker-api sh`
+- Run in container `python manage.py createsuperuser`
